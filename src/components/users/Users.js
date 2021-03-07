@@ -1,4 +1,5 @@
 import React from 'react'
+import Spinner from '../layout/Spinner';
 import UserItem from './UserItem';
 
 const userStyle = {
@@ -8,14 +9,19 @@ const userStyle = {
 };
 
 const Users = ({ users, loading }) => {
-    console.log(users);
-    return (
-        <div style={userStyle}>
-            {users.map(user => (
-                <UserItem key={user.id} user={user} />
-            ))}
-        </div>
-    )
+    //console.log(users);
+
+    if (loading) {
+        return <Spinner />
+    } else {
+        return (
+            <div style={userStyle}>
+                {users.map(user => (
+                    <UserItem key={user.id} user={user} />
+                ))}
+            </div>
+        )
+    }
 }
 
 export default Users;
