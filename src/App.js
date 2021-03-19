@@ -8,6 +8,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import About from './components/pages/About';
 import User from './components/users/User';
+import GithubState from './context/github/GithubState';
 
 function App() {
 
@@ -57,37 +58,39 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Alert alert={alert} />
-          <Switch>
-            {/*Route for the home page */}
-            <Route exact path="/" render={props => (
-              <>
-                <Search
-                  searchUsers={searchUsers}
-                  clearUsers={clearUsers}
-                  showClear={users.length > 0 ? true : false}
-                  setAlert={displayAlert}
-                />
-                < Users loading={loading} users={users} />
-              </>
-            )} />
+    <GithubState>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Alert alert={alert} />
+            <Switch>
+              {/*Route for the home page */}
+              <Route exact path="/" render={props => (
+                <>
+                  <Search
+                    searchUsers={searchUsers}
+                    clearUsers={clearUsers}
+                    showClear={users.length > 0 ? true : false}
+                    setAlert={displayAlert}
+                  />
+                  < Users loading={loading} users={users} />
+                </>
+              )} />
 
-            {/*Route for the About page */}
-            <Route exact path="/about" component={About} />
+              {/*Route for the About page */}
+              <Route exact path="/about" component={About} />
 
-            {/*Route for the Profile of the user */}
-            <Route exact path="/user/:login" render={(props) => (
-              <User {...props} getUser={getUser} user={user} loading={loading} getUserRepos={getUserRepos} repos={repos} />
-            )} />
+              {/*Route for the Profile of the user */}
+              <Route exact path="/user/:login" render={(props) => (
+                <User {...props} getUser={getUser} user={user} loading={loading} getUserRepos={getUserRepos} repos={repos} />
+              )} />
 
-          </Switch>
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GithubState>
   );
 }
 

@@ -11,6 +11,7 @@ const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
         getUser(match.params.login);
         getUserRepos(match.params.login);
 
+        //eslint-disable-next-line
     }, []);
 
     //destructure krlie hain api se yh sari chezein hmne jo use krni hain.
