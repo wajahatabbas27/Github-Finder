@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import Repos from '../repos/Repos';
+import GithubContext from '../../context/github/githubContext';
 
-const User = ({ user, loading, getUser, getUserRepos, repos, match }) => {
+
+const User = ({ match }) => {
+
+    const githubContext = useContext(GithubContext);
+    const { user, loading, getUser, getUserRepos, repos } = githubContext;
 
     useEffect(() => {
         //data bhejrhe hain functions mein jo destructure kre hain take api call krein app.js mein.
